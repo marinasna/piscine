@@ -10,14 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- Dernier JavaScript compilé -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="accueil.css">
-    <style>
-        .profile-photo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="piscine.css">
 </head>
 <body>
     <?php
@@ -38,99 +31,131 @@
     }
     ?>
     <div class="container">
-        <br>
-        <div class="row" style="height:180px; background-color: #FD5B78">
-            &nbsp &nbsp &nbsp
-            <!-- logo -->
-            <img src="img/m.gif" width="15%">
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            <!-- titre  -->
-            <img src="img/logo.png">
-            <!-- photo profil utilisateur -->
-            <div class="pull-right">
-                <br>
+        <header class="header">
+            <img src="img/logo.gif" alt="Logo" class="logo"> 
+            <img src="img/ECEin.png" alt="Logo" class="logo">
+            <div class="profile-info">
                 <?php if ($photo_profil): ?>
                     <img src="<?php echo htmlspecialchars($photo_profil); ?>" alt="Photo de profil" class="profile-photo">
                 <?php endif; ?>
-                <br><br>
-                <p >Bienvenue, <?php echo htmlspecialchars($nom) ; ?>!</p>
-                &nbsp &nbsp &nbsp
+                <p class="welcome-text">Bienvenue, <?php echo htmlspecialchars($nom); ?>!</p>
             </div>
-        </div>
-        <!-- les boutons -->
-        <div class="text-center">
-                    <br>
-                    <a href="http://localhost/piscine1/accueil.php">
-                        <button type="button" class="btn-custom btn btn-primary">Accueil</button>
-                    </a>
-                    <a href="http://localhost/piscine1/reseau.php">
-                        <button type="button" class="btn-custom btn btn-primary">Mon réseau</button>
-                    </a>
-                    <a href="http://localhost/piscine1/vous.php">
-                        <button type="button" class="btn-custom btn btn-primary">Vous</button>
-                    </a>
-                    <a href="notif.html">
-                        <button type="button" class="btn-custom btn btn-primary">Notifications</button>
-                    </a>
-                    <a href="message.html">
-                        <button type="button" class="btn-custom btn btn-primary">Messagerie</button>
-                    </a>
-                    <a href="http://localhost/piscine1/emplois.php">
-                        <button type="button" class="btn-custom btn btn-primary">Emplois</button>
-                    </a>
-                    <br>
-                    <!-- rajouter bouton + d'options et pp etc-->
-                </div>
-        <!-- jusqu'ici-->
-        <div class="row">
-            <div class="col-sm-6">
-                <p class="text-justify">
-                    <br>
-                    Cette plateforme est destinée aux personnes cherchant un emploi, un stage, une alternance ou autre.
-                    Vous pouvez y trouver de nombreuses possibilités d’exploitation comme une messagerie, 
-                    un espace dédié à vos connexions, c’est-à-dire les personnes avec qui vous êtes en relation ainsi qu’un espace offre d’emploi. 
-                    N’attendez plus et créez votre propre profil afin de découvrir les offres d’emploi qui vous correspondent. <br><br>
-                </p>
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                    </ol>
-                    <!-- Wrapper pour les images -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img src="img/francoiss.jpg" alt="francois" style="width:100%; height: 500px;">
-                            <div class="carousel-caption">
-                                <h3>Présentation de l'ECE</h3>
-                                <p>Le directeur vous explique tout!</p>
+        </header>
+        <nav class="navigation">
+            <a href="http://localhost/piscine1/accueil.php">
+                <button type="button" class="btn-custom btn btn-primary active-page">Accueil</button>
+            </a>
+            <a href="http://localhost/piscine1/reseau.php">
+                <button type="button" class="btn-custom btn btn-primary">Mon réseau</button>
+            </a>
+            <a href="http://localhost/piscine1/vous.php">
+                <button type="button" class="btn-custom btn btn-primary">Vous</button>
+            </a>
+            <a href="notif.html">
+                <button type="button" class="btn-custom btn btn-primary">Notifications</button>
+            </a>
+            <a href="message.html">
+                <button type="button" class="btn-custom btn btn-primary">Messagerie</button>
+            </a>
+            <a href="http://localhost/piscine1/emplois.php">
+                <button type="button" class="btn-custom btn btn-primary">Emplois</button>
+            </a>
+        </nav>
+        <main class="main-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="text-justify">
+                        Cette plateforme est destinée aux personnes cherchant un emploi, un stage, une alternance ou autre.
+                        Vous pouvez y trouver de nombreuses possibilités d’exploitation comme une messagerie, 
+                        un espace dédié à vos connexions, c’est-à-dire les personnes avec qui vous êtes en relation ainsi qu’un espace offre d’emploi. 
+                        N’attendez plus et créez votre propre profil afin de découvrir les offres d’emploi qui vous correspondent.
+                    </p>
+                    <h3> Evènements de la semaine à l'ECE</h3>
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="img/francois.png" alt="francois" style="width:100%; height: 500px;">
+                                <div class="carousel-caption">
+                                    <h3>Présentation de l'ECE</h3>
+                                    <p>Le directeur vous explique tout!</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="img/locaux.png" alt="JPO" style="width:100%; height: 500px;">
+                                <div class="carousel-caption">
+                                    <h3>JPO</h3>
+                                    <p>Venez découvrir le campus de Paris!</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="img/ambiance.png" alt="ambiance" style="width:100%; height: 500px;">
+                                <div class="carousel-caption">
+                                    <h3>Asso</h3>
+                                    <p>L'ECE c'est aussi une bonne ambiance</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="img/danse.png" alt="danse" style="width:100%; height: 500px;">
+                                <div class="carousel-caption">
+                                    <h3>Scorpion à l'ECE</h3>
+                                    <p>La semaine dernière on a eu un invité d'exception</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="item">
-                            <img src="img/jpoo.jpg" alt="JPO" style="width:100%; height: 500px;">
-                            <div class="carousel-caption">
-                                <h3>JPO</h3>
-                                <p>Venez découvrir le campus de Paris!</p>
-                            </div>
-                        </div>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Précédent</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Suivant</span>
+                        </a>
                     </div>
-                    <!-- Contrôles à gauche et à droite -->
-                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                        <span class="sr-only">Précédent</span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                        <span class="sr-only">Suivant</span>
-                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <h3>&nbsp;&nbsp;&nbsp;&nbsp;Événements personnels</h3>
+                    <?php
+                    // Connexion à la base de données
+                    $database = "reseau";
+                    $db_handle = mysqli_connect('localhost', 'root', '', $database);
+
+                    if ($db_handle) {
+                        // Requête pour récupérer les événements personnels
+                        $sql = "SELECT * FROM evenement WHERE organisateurID = $user_id ORDER BY date ASC";
+                        $result = mysqli_query($db_handle, $sql);
+
+                        if ($result) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<div class='job-notification'>";
+                                echo "<h4>" . htmlspecialchars($row['titre']) . "</h4>";
+                                echo "<p><strong>Lieu:</strong> " . htmlspecialchars($row['lieu']) . "<br>";
+                                echo "<strong>Description:</strong> " . htmlspecialchars($row['description']) . "<br>";
+                                echo "<strong>Date:</strong> " . htmlspecialchars($row['date']) . "<br>";
+                                echo "<strong>Organisateur:</strong> " . htmlspecialchars($row['organisateur']) . "<br>";
+                                echo "</div>";
+                            }
+                        } else {
+                            echo "Erreur lors de l'exécution de la requête : " . mysqli_error($db_handle);
+                        }
+
+                        mysqli_close($db_handle);
+                    } else {
+                        echo "Database not found";
+                    }
+                    ?>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <!-- post -->
-            </div>
-        </div>
+        </main>
+        <footer class="footer">
+            <p>Coordonnées: Adresse, Téléphone, Email</p>
+        </footer>
     </div>
 </body>
 </html>
+
