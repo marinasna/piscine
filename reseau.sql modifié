@@ -1,0 +1,241 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : dim. 02 juin 2024 à 20:17
+-- Version du serveur : 8.2.0
+-- Version de PHP : 8.2.13
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `reseau`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ami`
+--
+
+DROP TABLE IF EXISTS `ami`;
+CREATE TABLE IF NOT EXISTS `ami` (
+  `id_user1` int NOT NULL,
+  `id_user2` int NOT NULL,
+  `statut` int DEFAULT NULL,
+  PRIMARY KEY (`id_user1`,`id_user2`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `ami`
+--
+
+INSERT INTO `ami` (`id_user1`, `id_user2`, `statut`) VALUES
+(4, 5, 1),
+(5, 4, 1),
+(3, 2, 1),
+(1, 3, 1),
+(3, 1, 1),
+(2, 4, 1),
+(4, 2, 1),
+(2, 3, 1),
+(3, 5, 1),
+(5, 3, 1),
+(4, 1, 1),
+(1, 4, 1),
+(2, 1, 1),
+(1, 2, NULL),
+(4, 3, NULL),
+(3, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `emploi`
+--
+
+DROP TABLE IF EXISTS `emploi`;
+CREATE TABLE IF NOT EXISTS `emploi` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titre` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `entreprise` varchar(255) NOT NULL,
+  `lieu` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `type` int NOT NULL,
+  `experience` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `emploi`
+--
+
+INSERT INTO `emploi` (`id`, `titre`, `description`, `entreprise`, `lieu`, `date`, `type`, `experience`) VALUES
+(1, 'Développeur Web (H/F)', 'Nous recherchons un développeur web passionné pour rejoindre notre équipe dynamique. Vous travaillerez sur des projets innovants et collaborerez avec des designers et des développeurs expérimentés.', 'Ptech', 'Paris, France', '2024-08-05', 0, '3 ans minimum'),
+(2, 'Responsable Marketing Digital (H/F)', 'Vous serez responsable de la stratégie marketing digital et de sa mise en œuvre. Vous superviserez une équipe et travaillerez en étroite collaboration avec les autres départements.', 'WebMarket', 'Lyon, France', '2024-09-12', 0, '5 ans minimum'),
+(3, 'Assistant Commercial (H/F)', 'Nous recherchons un assistant commercial pour soutenir notre équipe de vente. Vous serez en charge de la gestion des dossiers clients et du suivi des commandes.', 'CommercePro', 'Marseille, France', '2024-07-01', 1, '2 ans minimum'),
+(4, 'Stagiaire en Développement Mobile (H/F)', 'En tant que stagiaire, vous participerez au développement de nos applications mobiles sous la supervision d\'un développeur senior.', 'AppTech', ' Nantes, France', '2024-06-15', 2, 'Stage de fin d\'études '),
+(5, 'alternance secrétariat général groupe Krys ', 'alternance pour aider le conseil d\'administration de krys groupe lors des réunions. ', 'KRYS GROUPE', 'Nanterre', '2025-04-15', 3, '1 ans minimum');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `evenement`
+--
+
+DROP TABLE IF EXISTS `evenement`;
+CREATE TABLE IF NOT EXISTS `evenement` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `organisateur` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `lieu` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `organisateurID` int NOT NULL,
+  `URL` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `evenement`
+--
+
+INSERT INTO `evenement` (`id`, `organisateur`, `description`, `titre`, `lieu`, `date`, `organisateurID`, `URL`) VALUES
+(1, 'ECE', 'journée porte ouverte a l\'ECE pour faire découvrir l\'école aux lycéens  ', 'journée porte ouverte', 'ECE campus Eiffel 1 ', '2024-08-05', 0, 'img/Jean/JPO.png'),
+(2, 'Marina Bona-Parte', 'petite réunion ece cook pour apprendre les bases de la cuisine ', 'TUTO cuisine ECE Cook', 'ECE campus Eiffel 1 cafeteria', '2024-06-15', 1, 'img/Jean/ececook.png'),
+(3, 'Emile Long', 'Première édition du Hackathon sur le thème de la cybersécurité. Première place remporte 1000€!', 'Hackathon', 'ECE Paris', '2024-06-10', 4, 'img/Jean/hackathon.png'),
+(7, 'Sara Anette', 'promo 2023!', 'Remise des diplomes', 'Palais des Glaces', '2024-06-16', 2, ''),
+(8, 'Jack Bongiovi', 'Venez vous entrainer pour le concours avenir!', 'JPCA', 'ECE Paris', '2024-06-05', 3, 'img/Jean/JPCA.png'),
+(9, 'Tom Holland', 'Conférence sur ma thèse sur le thème du Multiverse', 'Conférence', 'ECE Paris', '2024-09-08', 5, 'img/Jean/these.jpeg'),
+(10, 'Tom Holland', 'Avant première de mon nouveau film! Venez nombreux le découvrir', 'Avant première ', 'Le Grand Rex', '2024-06-27', 5, 'img/Jean/avantpremiere.jpeg'),
+(11, 'famille lucas', 'venez assister au mariage de capu et mica ca va etre le feu (si vous etes invité)', 'mariage capucine michael', 'normandie deauville', '2024-06-01', 1, 'img/Jean/mariage.png'),
+(4, 'ECE ', 'venez aider a l\'Organisation concours avenir en surveillant les candidats et en leur donnant brouillon ou sujet', 'Organisation concours avenir', 'porte de versaille', '2025-04-12', 0, 'img/Jean/concoursavenir.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `formation`
+--
+
+DROP TABLE IF EXISTS `formation`;
+CREATE TABLE IF NOT EXISTS `formation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titre` varchar(255) NOT NULL,
+  `temps` int NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `langue` varchar(255) NOT NULL,
+  `id_user` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `formation`
+--
+
+INSERT INTO `formation` (`id`, `titre`, `temps`, `description`, `langue`, `id_user`) VALUES
+(1, 'CPGE', 2, 'Classe préparatoire aux  grandes écoles MPSI (maths, physique, science de l\'ingénieur)', 'Français', 4),
+(2, 'école d\'ingénieur post bac ', 5, 'école d\'ingénieur post bac en 5 ans avec de l\'électronique, de l\'informatique et autres sciences', 'Français, Anglais', 5),
+(3, 'fac de droit ', 3, 'étude de droit avec droit pénal, droit des familles etc ', 'Allemand', 1),
+(4, 'école de cinéma', 4, 'école pour devenir acteur (théâtre) ou réalisateur ou encore caméraman', 'Suédois, Anglais, Français', 3),
+(5, 'BTS sécurité', 1, 'Apprentissage de défense pour devenir agent de sécurité pour des stars ou autre', 'Anglais, Espagnol', 2),
+(6, 'Bac général', 3, 'Bac général mention bien', 'Français', 1),
+(7, 'Bac général', 3, 'Bac général mention très bien', 'Français', 2),
+(8, 'Bac général', 3, 'Bac général mention assez bien', 'Français', 3),
+(9, 'Bac général', 3, 'Bac général mention bien', 'Français', 4),
+(10, 'Bac général', 3, 'Bac général mention bien', 'Anglais', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE IF NOT EXISTS `message` (
+  `id_message` int NOT NULL AUTO_INCREMENT,
+  `id_envoyeur` int NOT NULL,
+  `id_receveur` int NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`id_message`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `message`
+--
+
+INSERT INTO `message` (`id_message`, `id_envoyeur`, `id_receveur`, `message`, `date`) VALUES
+(1, 1, 4, 'salut comment vas tu ', '2024-06-01'),
+(2, 4, 1, 'ca va et toi ', '2024-06-01'),
+(3, 5, 4, 'salut, j\'ai une proposition!', '2024-06-02'),
+(4, 4, 5, 'oui dit moi tout', '2024-06-02'),
+(5, 3, 1, 'Bonjour Marina!', '2024-06-02'),
+(6, 1, 3, 'Bonjour!', '2024-06-02'),
+(7, 1, 4, 'ca va bien', '2024-06-02');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `profil`
+--
+
+DROP TABLE IF EXISTS `profil`;
+CREATE TABLE IF NOT EXISTS `profil` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `photo` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `profil`
+--
+
+INSERT INTO `profil` (`id`, `photo`, `description`, `nom`) VALUES
+(1, 'img/plouf/MarinaBona-Parte.jpg', 'Je suis Marina Bona-Parte, historienne, spécialisée dans l\'étude des dynasties européennes et des mouvements sociaux.', 'Marina Bona-Parte'),
+(2, 'img/plouf/SaraAnette.jpg', 'Étudiante en littérature, spécialisée dans les classiques de la littérature anglaise.\r\n', 'Sara Anette'),
+(3, 'img/plouf/jackBongiovi.jpg', 'Étudiant en musique, passionné par la composition et la performance scénique.\r\n', 'Jack Bongiovi'),
+(4, 'img/plouf/EmileLong.jpg', 'Ingénieur civil, travaillant sur des projets d\'infrastructure urbaine.\r\n', 'Emile Long'),
+(5, 'img/plouf/TomHolland.jpg', 'Acteur britannique, célèbre pour mon rôle de Spider-Man dans les films de l\'univers Marvel.\r\n', 'Tom Holland');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+DROP TABLE IF EXISTS `utilisateur`;
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `role` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `pseudo` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `role`, `email`, `pseudo`) VALUES
+(1, 'admin', 'marina@edu.ece.fr', 'marina_ad'),
+(2, 'auteur', 'sara@edu.ece.fr', 'sara_aut'),
+(3, 'auteur', 'jack@hotmail.com', 'jackiejack'),
+(4, 'auteur', 'emile@gmail.com', 'emilelooong'),
+(5, 'auteur', 'tommy@gmail.com', 'spiderr');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
