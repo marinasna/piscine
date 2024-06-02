@@ -1,0 +1,156 @@
+/* Styles globaux du site */
+body {
+    font-family: 'Helvetica', sans-serif;
+    background-color: #f3f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.header {
+    background-color: #0073b1;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Styles pour la navigation et les boutons */
+.navigation {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #005582;
+}
+
+.btn-custom {
+    background-color: #0073b1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.2s;
+}
+
+.btn-custom:hover {
+    background-color: #005582;
+}
+
+.footer {
+    background-color: #0073b1;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%; /* Assurez-vous que le footer est plein largeur */
+}
+
+/* Styles spécifiques pour le CV au centre */
+.cv-container {
+    background-color: white;
+    width: 388px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-gap: 20px;
+    margin-top: 20px; /* Ajoutez une marge en haut */
+}
+
+.cv-container h1, .cv-container .section {
+    margin: 0;
+    color: #000;
+}
+
+.cv-container .photo-profil {
+    width: 80px;
+    height: 80px;
+    background-color: #ccc;
+    margin: 0 auto;
+}
+
+/* Appliquer les styles de .profile-photo et autres si nécessaire */
+.cv-container .profile-photo {
+    width: 150px;
+    height: 150px;
+    
+    display: block;
+    margin: 0 auto 10px;
+}
+.cv-container img.profile-photo {
+    width: 80px;  /* Largeur de l'image de profil réduite */
+    height: 80px; /* Hauteur correspondante pour maintenir l'aspect ratio */
+    
+    display: block; /* Centrer l'image dans son conteneur */
+    margin: 10px auto; /* Espacement autour de l'image */
+}
+
+.cv-container {
+    position: fixed; /* ou absolute selon la structure de votre page */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%; /* ou la largeur désirée */
+    max-width: 800px; /* Ajustez selon vos besoins */
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000; /* Assurez-vous que cela s'affiche au-dessus des autres contenus */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+
+.cv-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left-side;
+}
+
+.cv-title {
+	clear: both;
+    font-size: 24px;
+    color: #0073b1; /* Style de titre selon vos préférences */
+    margin-bottom: 20px;
+    padding: 5px;
+    box-sizing: border-box;  
+
+}
+
+.cv-section {
+    width: 100%;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    box-sizing: border-box;  
+}
+.cv-detail {
+    display: block; /* S'assure que chaque détail est sur sa propre ligne */
+    margin-bottom: 5px;
+    line-height: 1.4; /* Augmente un peu l'espace entre les lignes */
+}
+.cv-section:first-child {
+    border-top: none;
+    margin-top: 0;
+}
+
+.cv-detail {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.main-content {
+    padding: 20px;
+    width: 100%; /* assure que le contenu principal occupe tout l'espace nécessaire */
+    max-width: none; /* supprime la limitation de largeur maximale si nécessaire */
+}
