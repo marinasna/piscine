@@ -101,6 +101,10 @@
                 <a href="notification.php?filter=friends_of_friends">
                     <button type="button" class="btn-custom">Événements d'amis d'amis</button>
                 </a>
+                &nbsp&nbsp&nbsp
+                <a href="notification.php?filter=partners">
+                    <button type="button" class="btn-custom">Événements de partenaires</button>
+                </a>
             </p>
             <div class="row">
                 <div class="col-sm-12">
@@ -152,6 +156,8 @@
                             } else {
                                 $sql .= " WHERE 1 = 0"; // Aucun ami d'ami trouvé
                             }
+                        } elseif ($filter == 'partners') {
+                            $sql .= " WHERE partenaire = 1";
                         }
 
                         $result = mysqli_query($db_handle, $sql);
