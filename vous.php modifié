@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vous</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" type="text/css" href="piscine.css">
+    <link rel="stylesheet" type="text/css" href="cvstyles.css">
+</head>
+<body>
+    <?php
+    session_start();
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION['id'];
+        $pseudo = $_SESSION['pseudo'];
+        $email = $_SESSION['email'];
+        $photo_profil = $_SESSION['photo'];
+        $nom = $_SESSION['nom'];
+    } else {
+        header("Location: role.html");
+        exit();
+    }
+    ?>
+    <div class="container">
+        <header class="header">
+            <img src="img/logo.gif" alt="Logo" class="logo"> 
+            <img src="img/ECEin.png" alt="Logo" class="logo">
+            <div class="profile-info">
+                <?php if ($photo_profil): ?>
+                    <img src="<?php echo htmlspecialchars($photo_profil); ?>" alt="Photo de profil" class="profile-photo">
+                <?php endif; ?>
+                <p class="welcome-text">Bienvenue, <?php echo htmlspecialchars($nom); ?>!</p>
+            </div>
+        </header>
+        <nav class="navigation">
+            <a href="http://localhost/piscine1/accueil.php"><button type="button" class="btn-custom btn btn-primary">Accueil</button></a>
+            <a href="http://localhost/piscine1/reseau.php"><button type="button" class="btn-custom btn btn-primary">Mon réseau</button></a>
+            <a href="http://localhost/piscine1/vous.php"><button type="button" class="btn-custom btn btn-primary active-page">Vous</button></a>
+            <a href="http://localhost/piscine1/notification.php"><button type="button" class="btn-custom btn btn-primary">Notifications</button></a>
+            <a href="http://localhost/piscine1/message.php"><button type="button" class="btn-custom btn btn-primary">Messagerie</button></a>
+            <a href="http://localhost/piscine1/emplois.php"><button type="button" class="btn-custom btn btn-primary">Emplois</button></a>
+        </nav>
+        <main class="main-content">
+            <div class="profile-container">
+                <div class="profile-image">
+                    <?php if ($photo_profil): ?>
+                        <img src="<?php echo htmlspecialchars($photo_profil); ?>" alt="Photo de profil" class="profile-photo">
+                    <?php endif; ?>
+                </div>
+                <div class="profile-description">
+                    <h2><?php echo htmlspecialchars($nom); ?></h2>
+                    <p>Email: <?php echo htmlspecialchars($email); ?></p>
+                </div>
+            </div>
+            <div class="user-formation">
+                <h3>Formations</h3>
+                <?php
+                $database = "reseau";
+                $db_handle = mysqli_connect('localhost', 'root', '', $database);
+                if ($db_handle) {
+                    $sql = "SELECT * FROM formation WHERE id_user = $user_id";
+                    $result = mysqli_query($db_handle, $sql);
+                    if ($result) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<div class='panel panel-default'>";
+                            echo "<div class='panel-heading'><h4>" . htmlspecialchars($row['titre']) . "</h4></div>";
+                            echo "<div class='panel-body'>";
+                            echo "<p><strong>Durée:</strong> " . htmlspecialchars($row['temps']) . " ans<br>";
+                            echo "<strong>Description:</strong> " . htmlspecialchars($row['description']) . "<br>";
+                            echo "<strong>Langue:</strong> " . htmlspecialchars($row['langue']) . "</p>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "Erreur lors de l'exécution de la requête : " . mysqli_error($db_handle);
+                    }
+                    mysqli_close($db_handle);
+                } else {
+                    echo "Database not found";
+                }
+                ?>
+            </div>
+            <div class="cv-generation">
+                <button type="button" id="generateCvButton" class="btn-custom btn btn-primary">Générer mon CV</button>
+            </div>
+            <div class="cv-container" style="display: none;"></div>
+            <div class="cv-download-tools" style="display: none;">
+                <button onclick="downloadJPEG()">Télécharger en JPEG</button>
+            </div>
+        </main>
+        <footer class="footer">
+            <p>ECE IN Paris | ecein.paris@gmail.com | 01 78 65 24 90 | 52 Avenue Sexius, Paris 75015</p>
+        </footer>
+    </div>
+    <!-- Scripts pour la capture et la génération de JPEG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#generateCvButton').click(function() {
+                loadCV();
+            });
+        });
+
+function loadCV() {
+            $.ajax({
+                url: "cv.php",
+                type: "GET",
+                dataType: "xml",
+                success: function(response) {
+                    var cv = $(response).find('CV');
+                    var content = `<div class='cv-content'>
+                                       <h1>${$(cv).find('Nom').first().text()}</h1>
+                                       <p>${$(cv).find('Email').first().text()}</p>
+                                       <img src="${$(cv).find('PhotoProfil').first().text()}" alt="Photo de profil" class="profile-photo">
+
+                                       <p>${$(cv).find('Description').first().text()}</p>`;
+                    $(cv).find('Formation').each(function() {
+                        content += `<div class="formation">
+                                        <h2>${$(this).find('Titre').text()}</h2>
+                                        <p>Durée: ${$(this).find('Duree').text()} ans</p>
+                                        <p>${$(this).find('DescriptionFormation').text()}</p>
+                                        <p>Langues: ${$(this).find('Langue').text()}</p>
+                                    </div>`;
+                    });
+                    content += `</div>`;
+                    $('.cv-container').html(content).show();
+                    $('.cv-download-tools').show();
+                },
+                error: function() {
+                    alert('Erreur lors du chargement du CV');
+                }
+            });
+        }
+
+        function downloadPDF() {
+            html2canvas(document.querySelector(".cv-content")).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF();
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save('download.pdf');
+            });
+        }
+
+        function downloadJPEG() {
+    setTimeout(() => {  // Attendre que le layout soit stable
+        html2canvas(document.querySelector(".cv-container"), {scale: 1}).then(canvas => {
+            let a = document.createElement('a');
+            a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+            a.download = 'cv_download.jpg';
+            a.click();
+        });
+    }, 500); // 500 ms de délai pour la stabilité
+}
+
+    </script>
+</body>
+</html>
+
+
+
