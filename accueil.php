@@ -51,10 +51,10 @@
             <a href="http://localhost/piscine1/vous.php">
                 <button type="button" class="btn-custom btn btn-primary">Vous</button>
             </a>
-            <a href="notif.html">
+            <a href="http://localhost/piscine1/notification.php">
                 <button type="button" class="btn-custom btn btn-primary">Notifications</button>
             </a>
-            <a href="message.html">
+            <a href="http://localhost/piscine1/message.php">
                 <button type="button" class="btn-custom btn btn-primary">Messagerie</button>
             </a>
             <a href="http://localhost/piscine1/emplois.php">
@@ -70,7 +70,7 @@
                         un espace dédié à vos connexions, c’est-à-dire les personnes avec qui vous êtes en relation ainsi qu’un espace offre d’emploi. 
                         N’attendez plus et créez votre propre profil afin de découvrir les offres d’emploi qui vous correspondent.
                     </p>
-                    <h3> Evènements de la semaine à l'ECE</h3>
+                    <h3> Événements de la semaine à l'ECE</h3>
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -119,15 +119,51 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
+                    <!-- publier -->
+                    <a href="publier.php">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Publier</button>
+                    </a>
+
                     <h3>&nbsp;&nbsp;&nbsp;&nbsp;Événements personnels</h3>
+                    <?php
+                    $database = "reseau";
+                    $db_handle = mysqli_connect('localhost', 'root', '', $database);
+
+                    if ($db_handle) {
+                        //  récupérer les événements personnels
+                        $sql = "SELECT * FROM evenement WHERE organisateurID = $user_id ORDER BY date ASC";
+                        $result = mysqli_query($db_handle, $sql);
+
+                        if ($result) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<div class='job-notification'>";
+                                echo "<h4>" . htmlspecialchars($row['titre']) . "</h4>";
+                                echo "<p><strong>Lieu:</strong> " . htmlspecialchars($row['lieu']) . "<br>";
+                                echo "<strong>Description:</strong> " . htmlspecialchars($row['description']) . "<br>";
+                                echo "<strong>Date:</strong> " . htmlspecialchars($row['date']) . "<br>";
+                                echo "<strong>Organisateur:</strong> " . htmlspecialchars($row['organisateur']) . "<br>";
+                                echo "</div>";
+                            }
+                        } else {
+                            echo "Erreur lors de l'exécution de la requête : " . mysqli_error($db_handle);
+                        }
+
+                        mysqli_close($db_handle);
+                    } else {
+                        echo "Database not found";
+                    }
+                    ?>
+                    <h3>&nbsp;&nbsp;&nbsp;&nbsp;Événements réseau</h3>
                     <?php
                     // Connexion à la base de données
                     $database = "reseau";
                     $db_handle = mysqli_connect('localhost', 'root', '', $database);
 
                     if ($db_handle) {
-                        // Requête pour récupérer les événements personnels
-                        $sql = "SELECT * FROM evenement WHERE organisateurID = $user_id ORDER BY date ASC";
+                        // Requête pour récupérer les événements réseau (événements organisés par les amis)
+                        $sql = "SELECT evenement.* FROM evenement 
+                                JOIN ami ON evenement.organisateurID = ami.id_user1
+                                WHERE ami.id_user2 = $user_id ORDER BY evenement.date ASC";
                         $result = mysqli_query($db_handle, $sql);
 
                         if ($result) {
@@ -153,9 +189,11 @@
             </div>
         </main>
         <footer class="footer">
-            <p>Coordonnées: Adresse, Téléphone, Email</p>
-        </footer>
-    </div>
+            <p>  ECE IN Paris &nbsp &nbsp|&nbsp &nbsp ecein.paris@gmail.com &nbsp &nbsp|&nbsp &nbsp 01 78 65 24 90 &nbsp &nbsp|&nbsp &nbsp
+                52 Avenue Sexius, Paris 75015
+            </p>
+    </footer>
+</div>
 </body>
 </html>
 

@@ -157,11 +157,3 @@ body {
 .btn-custom:active {
     background-color: #004b75;
 }
-
-.job-notification .image_evenement {
-    width: 250px;
-    height: 250px;
-    object-fit: cover; 
-    border-radius: 5px; 
-}
-

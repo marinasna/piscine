@@ -75,45 +75,10 @@
                     <!-- Ajoutez d'autres informations utilisateur ici -->
                 </div>
             </div>
-
-            <!-- Affichage des formations -->
-            <div class="user-formation">
-                <h3>Formations</h3>
-                <?php
-                // Connexion à la base de données
-                $database = "reseau";
-                $db_handle = mysqli_connect('localhost', 'root', '', $database);
-
-                if ($db_handle) {
-                    // Requête pour récupérer les formations de l'utilisateur
-                    $sql = "SELECT * FROM formation WHERE id_user = $user_id";
-                    $result = mysqli_query($db_handle, $sql);
-
-                    if ($result) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<div class='panel panel-default'>";
-                            echo "<div class='panel-heading'><h4>" . htmlspecialchars($row['titre']) . "</h4></div>";
-                            echo "<div class='panel-body'>";
-                            echo "<p><strong>Durée:</strong> " . htmlspecialchars($row['temps']) . " ans<br>";
-                            echo "<strong>Description:</strong> " . htmlspecialchars($row['description']) . "<br>";
-                            echo "<strong>Langue:</strong> " . htmlspecialchars($row['langue']) . "</p>";
-                            echo "</div>";
-                            echo "</div>";
-                        }
-                    } else {
-                        echo "Erreur lors de l'exécution de la requête : " . mysqli_error($db_handle);
-                    }
-
-                    mysqli_close($db_handle);
-                } else {
-                    echo "Database not found";
-                }
-                ?>
-            </div>
             <button type="button" class="btn-custom btn btn-primary">Générer mon CV</button>
         </main>
         <footer class="footer">
-            <p>  ECE IN Paris &nbsp &nbsp|&nbsp &nbsp ecein.paris@gmail.com &nbsp &nbsp|&nbsp &nbsp 01 78 65 24 90 &nbsp &nbsp|&nbsp &nbsp
+        <p>  ECE IN Paris &nbsp &nbsp|&nbsp &nbsp ecein.paris@gmail.com &nbsp &nbsp|&nbsp &nbsp 01 78 65 24 90 &nbsp &nbsp|&nbsp &nbsp
                 52 Avenue Sexius, Paris 75015
             </p>
         </footer>

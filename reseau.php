@@ -51,7 +51,7 @@ if (isset($_SESSION['id'])) {
         <a href="http://localhost/piscine1/notification.php">
             <button type="button" class="btn-custom btn btn-primary">Notifications</button>
         </a>
-        <a href="message.html">
+        <a href="http://localhost/piscine1/message.php">
             <button type="button" class="btn-custom btn btn-primary">Messagerie</button>
         </a>
         <a href="http://localhost/piscine1/emplois.php">
@@ -192,7 +192,9 @@ if (isset($_SESSION['id'])) {
         </div>
     </main>
     <footer class="footer">
-        <p>Coordonnées: Adresse, Téléphone, Email</p>
+    <p>  ECE IN Paris &nbsp &nbsp|&nbsp &nbsp ecein.paris@gmail.com &nbsp &nbsp|&nbsp &nbsp 01 78 65 24 90 &nbsp &nbsp|&nbsp &nbsp
+                52 Avenue Sexius, Paris 75015
+            </p>
     </footer>
 </div>
 </body>
